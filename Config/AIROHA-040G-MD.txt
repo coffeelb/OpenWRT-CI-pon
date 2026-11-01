@@ -1,4 +1,4 @@
-# Nokia XG-040G-MD - Airoha AN7583
+# Nokia XG-040G-MD - Airoha AN7581
 CONFIG_TARGET_airoha=y
 CONFIG_TARGET_airoha_an7581=y
 # Device profiles
