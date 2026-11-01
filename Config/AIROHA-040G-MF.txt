@@ -1,0 +1,20 @@
+# Nokia XG-040G-MF - Airoha AN7583
+CONFIG_TARGET_airoha=y
+CONFIG_TARGET_airoha_an7583=y
+# Device profiles
+CONFIG_TARGET_DEVICE_airoha_an7583_DEVICE_nokia_xg-040g-mf-ubi=y
+# PON
+CONFIG_PACKAGE_airoha-pon-debug=y
+CONFIG_PACKAGE_airoha-ponctl=y
+CONFIG_PACKAGE_airoha-pond=y
+CONFIG_PACKAGE_kmod-airoha-pon-frontend=y
+CONFIG_PACKAGE_kmod-airoha-xpon=y
+CONFIG_PACKAGE_luci-app-pon=y
+# WireGuard
+CONFIG_PACKAGE_kmod-wireguard=y
+CONFIG_PACKAGE_wireguard-tools=y
+CONFIG_PACKAGE_luci-proto-wireguard=y
+# Remove packages
+CONFIG_PACKAGE_luci-app-fullconenat-sonic=n
+CONFIG_PACKAGE_luci-app-router-tool=n
+CONFIG_PACKAGE_luci-app-cpufreq=n
