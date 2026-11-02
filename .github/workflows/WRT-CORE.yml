@@ -195,6 +195,34 @@ jobs:
 
           make defconfig -j$(nproc) && make clean -j$(nproc)
 
+      - name: Configure Default NTP Servers
+        run: |
+          cd ./wrt/
+
+          mkdir -p package/base-files/files/etc/uci-defaults
+
+          cat > package/base-files/files/etc/uci-defaults/99-custom-ntp <<'EOF'
+          #!/bin/sh
+
+          uci -q get system.ntp >/dev/null || uci set system.ntp=timeserver
+
+          uci set system.ntp.enabled='1'
+          uci set system.ntp.enable_server='0'
+
+          uci -q delete system.ntp.server
+
+          uci add_list system.ntp.server='ntp.aliyun.com'
+          uci add_list system.ntp.server='time1.cloud.tencent.com'
+          uci add_list system.ntp.server='time2.cloud.tencent.com'
+          uci add_list system.ntp.server='time.windows.com'
+
+          uci commit system
+
+          exit 0
+          EOF
+
+          chmod 755 package/base-files/files/etc/uci-defaults/99-custom-ntp
+
       - name: Prepare Rust Toolchain
         if: ${{ !inputs.WRT_TEST }}
         run: |
