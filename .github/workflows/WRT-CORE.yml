@@ -216,6 +216,9 @@ jobs:
           uci add_list system.ntp.server='time2.cloud.tencent.com'
           uci add_list system.ntp.server='time.windows.com'
 
+          uci set system.@system[0].timezone='CST-8'
+          uci set system.@system[0].zonename='Asia/Shanghai'
+
           uci commit system
 
           exit 0
