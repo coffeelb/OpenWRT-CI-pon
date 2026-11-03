@@ -1,0 +1,21 @@
+# Nokia XG-040G-MF - Airoha AN7583
+# Source: coolsnowwolf/lede
+
+CONFIG_TARGET_airoha=y
+CONFIG_TARGET_airoha_an7583=y
+
+# Device profile
+CONFIG_TARGET_DEVICE_airoha_an7583_DEVICE_nokia_xg-040g-mf-ubi=y
+
+# WireGuard
+CONFIG_PACKAGE_kmod-wireguard=y
+CONFIG_PACKAGE_wireguard-tools=y
+CONFIG_PACKAGE_luci-proto-wireguard=y
+
+# Additional packages
+CONFIG_PACKAGE_luci-app-upnp=y
+
+# Remove unnecessary packages
+CONFIG_PACKAGE_luci-app-fullconenat-sonic=n
+CONFIG_PACKAGE_luci-app-router-tool=n
+CONFIG_PACKAGE_luci-app-cpufreq=n
