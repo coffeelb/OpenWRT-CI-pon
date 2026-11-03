@@ -1,0 +1,52 @@
+
+# SPDX-License-Identifier: MIT
+
+name: AIROHA-040G-MF-LEDE
+
+on:
+  workflow_dispatch:
+    inputs:
+      PACKAGE:
+        description: '手动调整插件包，多个请用换行分隔。'
+        required: false
+        type: string
+      TEST:
+        description: '仅输出配置文件，不编译固件。'
+        default: false
+        required: false
+        type: boolean
+
+permissions: write-all
+
+jobs:
+  config:
+    name: ${{matrix.CONFIG}}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        CONFIG: [AIROHA-040G-MF-LEDE]
+        SOURCE: [coolsnowwolf/lede]
+        BRANCH: [master]
+
+    uses: ./.github/workflows/WRT-CORE.yml
+
+    with:
+      WRT_CONFIG: ${{matrix.CONFIG}}
+
+      # Default settings
+      WRT_THEME: bootstrap
+      WRT_NAME: OpenWrt
+      WRT_IP: 192.168.6.1
+      WRT_PW: 无
+
+      # Source
+      WRT_REPO: https://github.com/${{matrix.SOURCE}}.git
+      WRT_BRANCH: ${{matrix.BRANCH}}
+      WRT_SOURCE: ${{matrix.SOURCE}}
+
+      # Custom packages
+      WRT_PACKAGE: ${{inputs.PACKAGE}}
+
+      # Configuration test
+      WRT_TEST: ${{inputs.TEST || false}}
